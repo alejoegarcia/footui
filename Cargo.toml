@@ -1,0 +1,19 @@
+[package]
+name = "footui"
+version = "0.1.0"
+edition = "2024"
+author = "Alejo Garcia <hi@alejoegarcia.dev"
+description = "Terminal UI for browsing FIFA World Cup 2026 data"
+license = "MIT"
+
+[dependencies]
+anyhow = "1"
+crossterm = "0.28"
+directories = "6"
+jiff = "0.2"
+ratatui = "0.29"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+rusqlite = { version = "0.37", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "sync", "time"] }
