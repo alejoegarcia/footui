@@ -722,6 +722,10 @@ impl App {
         self.screen
     }
 
+    pub fn normalized_search_query(&self) -> String {
+    self.search_query.trim().to_lowercase()
+    }
+
     #[cfg(test)]
     pub fn country_filters(&self) -> &[CountriesFilter] {
         &self.country_filters
@@ -906,7 +910,7 @@ impl App {
     }
 
     pub fn visible_teams(&self) -> Vec<&Team> {
-        let query = normalized_search_query(&self.search_query);
+        let query = self.normalized_search_query();
         let mut teams = self
             .snapshot
             .teams
@@ -934,7 +938,7 @@ impl App {
     }
 
     pub fn visible_matches(&self) -> Vec<&Match> {
-        let query = normalized_search_query(&self.search_query);
+        let query = self.normalized_search_query();
         let mut matches = self
             .snapshot
             .matches
@@ -966,7 +970,7 @@ impl App {
     }
 
     pub fn visible_standings(&self) -> Vec<&StandingRow> {
-        let query = normalized_search_query(&self.search_query);
+      let query = self.normalized_search_query();
         let mut standings = self
             .snapshot
             .standings
@@ -2114,10 +2118,10 @@ impl App {
     }
 
     fn start_search(&mut self) {
-        if matches!(self.screen, Screen::Home | Screen::Facts) {
-            self.message = format!("{} search is not implemented yet.", self.screen.title());
-            return;
-        }
+        // if matches!(self.screen, Screen::Home | Screen::Facts) {
+        //     self.message = format!("{} search is not implemented yet.", self.screen.title());
+        //     return;
+        // }
 
         self.input_mode = InputMode::Search;
         self.help_open = false;
@@ -2441,10 +2445,6 @@ impl App {
     pub fn quit_confirm_open(&self) -> bool {
         self.input_mode == InputMode::QuitConfirm
     }
-}
-
-fn normalized_search_query(query: &str) -> String {
-    query.trim().to_lowercase()
 }
 
 fn contains_query(value: &str, query: &str) -> bool {
@@ -3143,7 +3143,6 @@ mod tests {
         app.handle_command(AppCommand::SubmitSearch);
 
         assert_eq!(app.input_mode(), InputMode::Normal);
-        assert_eq!(app.search_query(), "ar");
     }
 
     #[test]

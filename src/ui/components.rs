@@ -394,6 +394,7 @@ fn state_lines(app: &App) -> Vec<Line<'static>> {
     let last_updated = app.last_sync_label();
     let favorite_state = if app.favorite_only() { "on" } else { "off" };
     let global_active = global_scope_active(app);
+    let query = app.normalized_search_query();
 
     vec![
         label_line("state", status.state.label()),
@@ -402,6 +403,7 @@ fn state_lines(app: &App) -> Vec<Line<'static>> {
         Line::from(""),
         shortcut_value_line("last [s]ync", last_updated, global_active),
         shortcut_value_line("[t]ime", app.time_mode().label(), global_active),
+        shortcut_value_line("s[e]arch", query, global_active),
         shortcut_value_line("[f]avorites", favorite_state, global_active),
         Line::from(""),
         label_line("msg", ""),

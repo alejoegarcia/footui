@@ -36,7 +36,7 @@ pub fn render(frame: &mut Frame<'_>, area: Rect, app: &App) -> components::Panel
     } else {
         matches.clone()
     };
-    let title = screen_title_with_count("Standings", visible_rows.len(), matches.len());
+    let title = screen_title_with_count("Matches", visible_rows.len(), matches.len());
 
     let header = vec![
         components::filter_line(filter),

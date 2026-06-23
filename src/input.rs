@@ -31,7 +31,7 @@ fn normal_command(
         }
         KeyCode::Char('?') => Some(AppCommand::ToggleHelp),
         KeyCode::Char(' ') => Some(AppCommand::ToggleKeyScope),
-        KeyCode::Char('/') => Some(AppCommand::StartSearch),
+        KeyCode::Char('e') => Some(AppCommand::StartSearch),
         KeyCode::Char('0') => Some(AppCommand::Navigate(Screen::Home)),
         KeyCode::Char('1') => Some(AppCommand::Navigate(Screen::Countries)),
         KeyCode::Char('2') => Some(AppCommand::Navigate(Screen::Matches)),
@@ -88,10 +88,6 @@ fn screen_command(key: KeyEvent, screen: Screen, focus: FocusPane) -> Option<App
 
     match screen {
         Screen::Countries => {
-            if character == 'q' {
-                return Some(AppCommand::StartSearch);
-            }
-
             if character == '*' {
                 return Some(AppCommand::ToggleSelectedCountryFavorite);
             }

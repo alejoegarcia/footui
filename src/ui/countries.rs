@@ -16,7 +16,7 @@ use crate::app::App;
 pub fn render(frame: &mut Frame<'_>, area: Rect, app: &App) -> components::PanelMetrics {
     let filter = app.country_filter_label();
     let teams = app.visible_teams();
-    let title = screen_title_with_count("Standings", teams.len(), app.team_count());
+    let title = screen_title_with_count("Countries", teams.len(), app.team_count());
     let header = vec![
         components::filter_line(filter.clone()),
         components::sort_line_for_scope(
@@ -33,7 +33,7 @@ pub fn render(frame: &mut Frame<'_>, area: Rect, app: &App) -> components::Panel
         ),
         components::shortcut_menu_line_for_scope(
             "Actions: ",
-            ["[q] search", "[*] favorite selected"],
+            ["[*] favorite selected"],
             components::screen_scope_active(app),
         ),
     ];
